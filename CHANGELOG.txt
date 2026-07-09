@@ -1,0 +1,49 @@
+CARE WITH HERBS WEBSITE
+
+Version 1.0
+Date: 03-07-2026
+
+Completed Features:
+
+✔ Responsive Home Page
+✔ Professional Navbar
+✔ Mobile Menu
+✔ Search Products
+✔ Category Filter
+✔ Product Details Page
+✔ Related Products
+✔ About Section
+✔ Customer Reviews
+✔ Footer
+✔ Floating WhatsApp Button
+✔ Add to Cart
+✔ Live Cart Counter
+✔ Cart Drawer (Base)
+✔ Mobile Responsive Design
+
+Version 1.1
+Date: 03-07-2026
+
+✔ Shopping Cart
+✔ Live Cart Counter
+✔ Cart Drawer
+✔ Quantity + / -
+✔ Remove Product
+✔ Auto Total
+
+Version 1.2
+Date: 03-07-2026
+
+✔ Checkout Page
+✔ Customer Details Form
+✔ Order Summary
+✔ Cart → Checkout Flow
+
+
+
+Next Features:
+
+□ Razorpay Payment
+□ Wishlist
+□ SEO Optimization
+□ Deployment
