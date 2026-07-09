@@ -19,102 +19,152 @@ export default function CheckoutPage() {
     0
   );
 
-  const whatsappMessage = encodeURIComponent(`
-Hello Care With Herbs,
+  const handleCheckout = () => {
+    if (!form.name.trim()) {
+      alert("Please enter your Full Name.");
+      return;
+    }
+
+    if (!/^[6-9]\d{9}$/.test(form.phone)) {
+      alert("Please enter a valid 10-digit Mobile Number.");
+      return;
+    }
+
+    if (!form.address.trim()) {
+      alert("Please enter your Address.");
+      return;
+    }
+
+    if (!form.city.trim()) {
+      alert("Please enter your City.");
+      return;
+    }
+
+    if (!/^\d{6}$/.test(form.pincode)) {
+      alert("Please enter a valid 6-digit PIN Code.");
+      return;
+    }
+
+    const message = encodeURIComponent(`🌿 CARE WITH HERBS ORDER
 
 Customer Details
 
-Name: ${form.name}
-Phone: ${form.phone}
-Address: ${form.address}
-City: ${form.city}
-PIN Code: ${form.pincode}
+👤 Name: ${form.name}
+📞 Phone: ${form.phone}
 
--------------------------
+🏠 Address:
+${form.address}
+
+🏙️ City: ${form.city}
+
+📮 PIN Code: ${form.pincode}
+
+----------------------------
 
 Order Details
 
 ${cart
   .map(
     (item) =>
-      `${item.name}
+      `• ${item.name}
 Qty: ${item.quantity}
 Price: ₹${item.price * item.quantity}`
   )
   .join("\n\n")}
 
--------------------------
+----------------------------
 
-Total Amount: ₹${total}
+💰 Total Amount: ₹${total}
 
-Thank You.
-`);
+Thank You 🙏`);
+
+    window.open(
+      `https://wa.me/918533004409?text=${message}`,
+      "_blank"
+    );
+  };
 
   return (
-    <main className="max-w-5xl mx-auto px-6 py-32">
+    <main className="max-w-6xl mx-auto px-6 py-32">
 
       <h1 className="text-4xl font-bold text-[#1B5E20] mb-10">
         Checkout
       </h1>
 
-      <div className="grid md:grid-cols-2 gap-10">
+      <div className="grid lg:grid-cols-2 gap-10">
 
         {/* Customer Details */}
-        <div className="space-y-5">
 
-          <input
-            type="text"
-            placeholder="Full Name"
-            value={form.name}
-            onChange={(e) =>
-              setForm({ ...form, name: e.target.value })
-            }
-            className="w-full border rounded-xl p-4"
-          />
+        <div className="bg-white rounded-2xl shadow-lg p-8">
 
-          <input
-            type="tel"
-            placeholder="Mobile Number"
-            value={form.phone}
-            onChange={(e) =>
-              setForm({ ...form, phone: e.target.value })
-            }
-            className="w-full border rounded-xl p-4"
-          />
+          <h2 className="text-2xl font-bold mb-6">
+            Customer Details
+          </h2>
 
-          <textarea
-            placeholder="Address"
-            value={form.address}
-            onChange={(e) =>
-              setForm({ ...form, address: e.target.value })
-            }
-            className="w-full border rounded-xl p-4 h-28"
-          />
+          <div className="space-y-5">
 
-          <input
-            type="text"
-            placeholder="City"
-            value={form.city}
-            onChange={(e) =>
-              setForm({ ...form, city: e.target.value })
-            }
-            className="w-full border rounded-xl p-4"
-          />
+            <input
+              type="text"
+              placeholder="Full Name"
+              value={form.name}
+              onChange={(e) =>
+                setForm({ ...form, name: e.target.value })
+              }
+              className="w-full border rounded-xl p-4"
+            />
 
-          <input
-            type="text"
-            placeholder="PIN Code"
-            value={form.pincode}
-            onChange={(e) =>
-              setForm({ ...form, pincode: e.target.value })
-            }
-            className="w-full border rounded-xl p-4"
-          />
+            <input
+              type="tel"
+              placeholder="Mobile Number"
+              value={form.phone}
+              onChange={(e) =>
+                setForm({ ...form, phone: e.target.value })
+              }
+              className="w-full border rounded-xl p-4"
+            />
+
+            <textarea
+              placeholder="Address"
+              value={form.address}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  address: e.target.value,
+                })
+              }
+              className="w-full border rounded-xl p-4 h-28"
+            />
+
+            <input
+              type="text"
+              placeholder="City"
+              value={form.city}
+              onChange={(e) =>
+                setForm({ ...form, city: e.target.value })
+              }
+              className="w-full border rounded-xl p-4"
+            />
+
+            <input
+              type="text"
+              placeholder="PIN Code"
+              value={form.pincode}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  pincode: e.target.value,
+                })
+              }
+              className="w-full border rounded-xl p-4"
+            />
+
+          </div>
 
         </div>
 
         {/* Order Summary */}
-        <div className="bg-white shadow-lg rounded-2xl p-6">
+
+        <div className="bg-white rounded-2xl shadow-lg p-8">
 
           <h2 className="text-2xl font-bold mb-6">
             Order Summary
@@ -125,23 +175,27 @@ Thank You.
             {cart.map((item) => (
               <div
                 key={item.id}
-                className="flex justify-between"
+                className="flex justify-between border-b pb-3"
               >
-                <span>
-                  {item.name} × {item.quantity}
-                </span>
+                <div>
+                  <p className="font-semibold">
+                    {item.name}
+                  </p>
 
-                <span>
+                  <p className="text-gray-500 text-sm">
+                    Qty: {item.quantity}
+                  </p>
+                </div>
+
+                <p className="font-bold">
                   ₹{item.price * item.quantity}
-                </span>
+                </p>
               </div>
             ))}
 
           </div>
 
-          <hr className="my-6" />
-
-          <div className="flex justify-between text-2xl font-bold">
+          <div className="flex justify-between text-2xl font-bold mt-8">
 
             <span>Total</span>
 
@@ -149,14 +203,12 @@ Thank You.
 
           </div>
 
-          <a
-            href={`https://wa.me/918533004409?text=${whatsappMessage}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block mt-8 bg-green-600 hover:bg-green-700 text-white text-center py-4 rounded-xl font-semibold"
+          <button
+            onClick={handleCheckout}
+            className="w-full mt-8 bg-green-600 hover:bg-green-700 text-white py-4 rounded-xl text-lg font-semibold transition"
           >
             📱 Place Order on WhatsApp
-          </a>
+          </button>
 
         </div>
 

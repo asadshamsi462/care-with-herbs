@@ -321,7 +321,7 @@ const products = [
     stock: "In Stock",
     badge: "Best Seller",
     isNew: true,
-    weight: "100/50 GM",
+   weight: "50 GM & 100 GM",
 
     description:
       "Traditional Triphala Powder prepared using Amla, Harad and Baheda.",
