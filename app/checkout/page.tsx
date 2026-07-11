@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useCart } from "../context/CartContext";
 
 export default function CheckoutPage() {
-  const { cart } = useCart();
+  const { cart, clearCart } = useCart();
 
   const [form, setForm] = useState({
     name: "",
@@ -78,13 +78,15 @@ Price: ₹${item.price * item.quantity}`
 
 Thank You 🙏`);
 
-    window.open(
-      `https://wa.me/918533004409?text=${message}`,
-      "_blank"
-    );
-  };
+   window.open(
+  `https://wa.me/918533004409?text=${message}`,
+  "_blank"
+);
 
-  return (
+clearCart();
+};
+
+return (
     <main className="max-w-6xl mx-auto px-6 py-32">
 
       <h1 className="text-4xl font-bold text-[#1B5E20] mb-10">

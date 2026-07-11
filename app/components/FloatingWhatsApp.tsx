@@ -1,5 +1,5 @@
-export default function FloatingWhatsApp() {
-  return (
+     export default function FloatingWhatsApp() {
+     return (
     <a
       href="https://wa.me/918533004409"
       target="_blank"

@@ -112,8 +112,9 @@ export default function Home() {
       <AboutSection />
 
       {/* Products */}
-     <section
-     className="max-w-7xl mx-auto px-4 sm:px-6 pt-28 md:pt-36 pb-16 md:pb-20">
+      <section
+           id="products"
+           className="max-w-7xl mx-auto px-4 sm:px-6 pt-28 md:pt-36 pb-16 md:pb-20">
       
 
         <h2 className="text-4xl font-bold text-center text-[#1B5E20] mb-8">
