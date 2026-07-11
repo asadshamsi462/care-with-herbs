@@ -72,10 +72,10 @@ export default function Navbar() {
             </button>
 
             {/* Mobile Menu */}
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="md:hidden"
-            >
+          <button
+           onClick={() => setMenuOpen(!menuOpen)}
+           className="md:hidden text-[#1B5E20] hover:text-[#C8A24C] transition-colors duration-300"
+          >
               {menuOpen ? <X size={30} /> : <Menu size={30} />}
             </button>
 
@@ -89,7 +89,7 @@ export default function Navbar() {
             <a
               href="/"
               onClick={closeMenu}
-              className="block px-6 py-4 border-b"
+              className="block px-6 py-5 border-b border-gray-200 text-[#1B5E20] text-xl font-semibold hover:bg-[#F8F6EF] hover:text-[#C8A24C] transition-all duration-300"
             >
               Home
             </a>
@@ -97,7 +97,7 @@ export default function Navbar() {
             <a
               href="/#products"
               onClick={closeMenu}
-              className="block px-6 py-4 border-b"
+              className="block px-6 py-5 border-b border-gray-200 text-[#1B5E20] text-xl font-semibold hover:bg-[#F8F6EF] hover:text-[#C8A24C] transition-all duration-300"
             >
               Products
             </a>
@@ -105,15 +105,14 @@ export default function Navbar() {
             <a
               href="/#about"
               onClick={closeMenu}
-              className="block px-6 py-4 border-b"
-            >
+              className="block px-6 py-5 border-b border-gray-200 text-[#1B5E20] text-xl font-semibold hover:bg-[#F8F6EF] hover:text-[#C8A24C] transition-all duration-300"            >
               About
             </a>
 
             <a
               href="/#contact"
               onClick={closeMenu}
-              className="block px-6 py-4 border-b"
+              className="block px-6 py-5 border-b border-gray-200 text-[#1B5E20] text-xl font-semibold hover:bg-[#F8F6EF] hover:text-[#C8A24C] transition-all duration-300"
             >
               Contact
             </a>
@@ -124,7 +123,7 @@ export default function Navbar() {
                   setCartOpen(true);
                   closeMenu();
                 }}
-                className="relative w-full bg-[#C8A24C] text-white py-3 rounded-xl"
+               className="relative w-full bg-[#C8A24C] hover:bg-[#B8923D] text-white py-4 rounded-2xl text-lg font-semibold shadow-lg transition-all duration-300"
               >
                 🛒 Cart
 
