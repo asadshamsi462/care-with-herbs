@@ -35,17 +35,18 @@ export default function Home() {
               100% Natural Herbal Products
             </p>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#1B5E20] leading-tight">
+           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[#1B5E20] leading-tight flex items-start">
               CARE WITH HERBS
-            </h1>
+              <span className="ml-1 text-lg sm:text-xl md:text-2xl align-top">™</span>
+          </h1>
 
            <p className="mt-6 text-base sm:text-lg md:text-xl text-gray-700">
-  Premium Ayurvedic Herbs for a Healthy Lifestyle.
-</p>
+        Premium Ayurvedic Herbs for a Healthy Lifestyle.
+     </p>
 
-<div className="mt-8 flex flex-wrap gap-3">
+    <div className="mt-8 flex flex-wrap gap-3">
 
-  <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-green-100">
+     <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-green-100">
     <span>🌿</span>
     <span className="text-sm font-medium text-[#1B5E20]">
       100% Natural
@@ -133,7 +134,7 @@ export default function Home() {
         </div>
 
         {/* Categories */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
           {[
             "All",
             "Immunity",
@@ -149,7 +150,7 @@ export default function Home() {
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-5 py-2 rounded-full transition font-medium ${
+              className={`px-4 py-2 text-sm rounded-full transition font-medium whitespace-nowrap ${
                 selectedCategory === category
                   ? "bg-[#1B5E20] text-white"
                   : "bg-white border border-gray-300 hover:bg-[#1B5E20] hover:text-white"
