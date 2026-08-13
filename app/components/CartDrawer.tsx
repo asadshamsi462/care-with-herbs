@@ -62,10 +62,11 @@ export default function CartDrawer({
 
               {cart.map((item) => (
                 <div
-                  key={item.id}
+                  key={item.cartKey}
                   className="flex gap-4 border rounded-xl p-3"
                 >
-                  <div className="relative w-20 h-20 bg-[#f8f6ef] rounded-lg">
+                  {/* Product Image */}
+                  <div className="relative w-20 h-20 bg-[#f8f6ef] rounded-lg shrink-0">
                     <Image
                       src={item.image}
                       alt={item.name}
@@ -74,16 +75,26 @@ export default function CartDrawer({
                     />
                   </div>
 
+                  {/* Product Details */}
                   <div className="flex-1">
 
                     <h3 className="font-semibold text-[#1B5E20]">
                       {item.name}
                     </h3>
 
+                    {item.weight && (
+                      <p className="text-sm text-gray-500 mt-1">
+                        Weight: {item.weight}
+                      </p>
+                    )}
+
+                    {/* Quantity */}
                     <div className="flex items-center gap-3 mt-3">
 
                       <button
-                        onClick={() => decreaseQuantity(item.id)}
+                        onClick={() =>
+                          decreaseQuantity(item.cartKey)
+                        }
                         className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 font-bold"
                       >
                         −
@@ -94,7 +105,9 @@ export default function CartDrawer({
                       </span>
 
                       <button
-                        onClick={() => increaseQuantity(item.id)}
+                        onClick={() =>
+                          increaseQuantity(item.cartKey)
+                        }
                         className="w-8 h-8 rounded-full bg-[#1B5E20] text-white hover:bg-green-800 font-bold"
                       >
                         +
@@ -102,12 +115,16 @@ export default function CartDrawer({
 
                     </div>
 
+                    {/* Item Total */}
                     <p className="font-bold mt-3 text-[#1B5E20]">
                       ₹{item.price * item.quantity}
                     </p>
 
+                    {/* Remove */}
                     <button
-                      onClick={() => removeFromCart(item.id)}
+                      onClick={() =>
+                        removeFromCart(item.cartKey)
+                      }
                       className="text-red-500 text-sm mt-2 hover:underline"
                     >
                       Remove

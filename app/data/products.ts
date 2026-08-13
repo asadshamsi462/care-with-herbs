@@ -13,6 +13,17 @@ const products = [
     isNew: true,
     weight: "100 GM",
 
+    sizes: [
+     {
+       weight: "50 GM",
+       mrp: 90,
+     },
+     {
+       weight: "100 GM",
+       mrp: 120,
+     },
+  ],
+
     description:
       "Premium quality Amla Powder made from carefully selected Indian Gooseberries.",
 
@@ -45,6 +56,17 @@ const products = [
     isNew: false,
     weight: "100 GM",
 
+    sizes: [
+     {
+         weight: "50 GM",
+         mrp: 90,
+     },
+     {
+         weight: "100 GM",
+         mrp: 130,
+     },
+  ],
+
     description:
       "Traditional Ayurvedic hair care blend of Amla, Reetha and Shikakai.",
 
@@ -76,7 +98,16 @@ const products = [
     badge: "Best Seller",
     isNew: true,
     weight: "100 GM",
-
+    sizes: [
+      {
+        weight: "50 GM",
+        mrp: 100,
+      },
+      {
+        weight: "100 GM",
+        mrp: 120,
+      },
+   ],
     description:
       "Premium Arjuna Chal Powder prepared from quality bark.",
 
@@ -107,7 +138,16 @@ const products = [
     badge: "Best Seller",
     isNew: true,
     weight: "100 GM",
-
+    sizes: [
+       {
+         weight: "50 GM",
+         mrp: 120,
+       },
+       {
+         weight: "100 GM",
+         mrp: 170,
+       },
+    ],
     description:
       "Premium quality Gurehal Powder.",
 
@@ -136,7 +176,16 @@ const products = [
     badge: "Best Seller",
     isNew: false,
     weight: "100 GM",
-
+    sizes: [
+     {
+        weight: "50 GM",
+        mrp: 90,
+     },
+     {
+        weight: "100 GM",
+        mrp: 120,
+     },
+  ],
     description:
       "Premium Jamun Powder made from carefully selected Jamun fruits.",
 
@@ -167,6 +216,16 @@ const products = [
     badge: "Best Seller",
     isNew: true,
     weight: "100 GM",
+    sizes: [
+       {
+          weight: "50 GM",
+          mrp: 100,
+       },
+       {
+          weight: "100 GM",
+          mrp: 130,
+       },
+    ],
 
     description:
       "Premium quality Karela Powder prepared from fresh bitter gourd.",
@@ -198,6 +257,16 @@ const products = [
     badge: "Best Seller",
     isNew: true,
     weight: "100 GM",
+    sizes: [
+       {
+          weight: "50 GM",
+          mrp: 110,
+       },
+       {
+          weight: "100 GM",
+          mrp: 150,
+       },
+    ],
 
     description:
       "Premium Konch Powder made from carefully processed seeds.",
@@ -230,7 +299,16 @@ const products = [
     isNew: true,
 
     weight: "100 GM",
-
+    sizes: [
+       {
+          weight: "50 GM",
+          mrp: 100,
+       },
+       {
+         weight: "100 GM",
+         mrp: 130,
+       },
+    ],
     description:
       "Premium Neem Powder made from fresh neem leaves.",
 
@@ -260,6 +338,16 @@ const products = [
     badge: "Best Seller",
     isNew: true,
     weight: "100 GM",
+    sizes: [
+       {
+           weight: "50 GM",
+           mrp: 250,
+       },
+       {
+           weight: "100 GM",
+           mrp: 430,
+       },   
+    ],
 
     description:
       "Premium Safed Musli Powder made from carefully selected roots.",
@@ -291,7 +379,16 @@ const products = [
     badge: "Best Seller",
     isNew: true,
     weight: "100 GM",
-
+    sizes: [
+       {
+            weight: "50 GM",
+            mrp: 230,
+       },
+       {
+            weight: "100 GM",
+            mrp: 410,
+      },
+  ],
     description:
       "Premium Satawari Powder prepared from high quality roots.",
 
@@ -321,7 +418,17 @@ const products = [
     stock: "In Stock",
     badge: "Best Seller",
     isNew: true,
-   weight: "50 GM & 100 GM",
+   weight: "100 GM",
+   sizes: [
+      {
+          weight: "50 GM",
+          mrp: 80,
+      },
+      {
+          weight: "100 GM",
+          mrp: 100,
+      },
+   ],
 
     description:
       "Traditional Triphala Powder prepared using Amla, Harad and Baheda.",
@@ -352,7 +459,16 @@ const products = [
   badge: "Best Seller",
   isNew: true,
   weight: "100 GM",
-
+  sizes: [
+       {
+           weight: "50 GM",
+           mrp: 140,
+       },
+       {
+           weight: "100 GM",
+           mrp: 210,
+       },
+    ],
   description:
     "Premium quality Ashwagandha Powder made from carefully selected Ashwagandha roots.",
 

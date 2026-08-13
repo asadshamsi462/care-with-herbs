@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 import Image from "next/image";
 import products from "./data/products";
 import ProductCard from "./components/ProductCard";
@@ -10,7 +11,41 @@ import ReviewsSection from "./components/ReviewsSection";
 export default function Home() {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [productSizes, setProductSizes] = useState<
+  {
+    product_id: number;
+    weight: string;
+    mrp: number;
+    price: number;
+  }[]
+>([]);
 
+useEffect(() => {
+  const loadProductSizes = async () => {
+    const { data, error } = await supabase
+      .from("product_sizes")
+      .select("product_id, weight, mrp, price")
+      .order("id", { ascending: true });
+
+    if (error) {
+      console.error("Product sizes error:", error);
+      return;
+    }
+
+    if (data) {
+      setProductSizes(
+        data.map((size) => ({
+          product_id: Number(size.product_id),
+          weight: size.weight,
+          mrp: Number(size.mrp),
+          price: Number(size.price),
+        }))
+      );
+    }
+  };
+
+  loadProductSizes();
+}, []);
   const filteredProducts = products.filter((product) => {
     const matchesSearch = product.name
       .toLowerCase()
@@ -165,9 +200,12 @@ export default function Home() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {filteredProducts.map((product) => (
             <ProductCard
-              key={product.id}
-              product={product}
-            />
+  key={product.id}
+  product={product}
+  sizes={productSizes.filter(
+    (size) => size.product_id === product.id
+  )}
+/>
           ))}
         </div>
       </section>

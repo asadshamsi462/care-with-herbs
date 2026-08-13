@@ -1,5 +1,5 @@
 "use client";
-
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Image from "next/image";
 import { Menu, X, ShoppingCart } from "lucide-react";
@@ -7,6 +7,11 @@ import { useCart } from "../context/CartContext";
 import CartDrawer from "./CartDrawer";
 
 export default function Navbar() {
+  const pathname = usePathname();
+
+if (pathname.startsWith("/admin")) {
+  return null;
+}
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
 

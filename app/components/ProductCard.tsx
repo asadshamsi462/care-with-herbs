@@ -1,6 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
+type Size = {
+  product_id: number;
+  weight: string;
+  price: number;
+  mrp: number;
+};
+
 type Product = {
   id: number;
   slug: string;
@@ -13,7 +20,13 @@ type Product = {
   isNew?: boolean;
 };
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({
+  product,
+  sizes = [],
+}: {
+  product: Product;
+  sizes?: Size[];
+}) {
   return (
     <div className="group bg-white rounded-[28px] overflow-hidden border border-[#e8e8e8] shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
 
@@ -57,32 +70,47 @@ export default function ProductCard({ product }: { product: Product }) {
           {product.name}
         </h3>
 
-        {/* Price */}
+       {/* Price will be loaded from product sizes */}
+{/* Price */}
 
-        {product.price && (
+{sizes.length > 0 && (() => {
+  const lowestSize = [...sizes].sort(
+    (a, b) => a.price - b.price
+  )[0];
 
-          <div className="flex items-center gap-2 mt-5 flex-wrap">
+  const discount =
+    lowestSize.mrp > 0
+      ? Math.round(
+          ((lowestSize.mrp - lowestSize.price) /
+            lowestSize.mrp) *
+            100
+        )
+      : 0;
 
-            <span className="text-3xl font-bold text-[#1B5E20]">
-              ₹{product.price}
-            </span>
+  return (
+    <div className="mt-5">
+      <div className="flex items-center gap-2 flex-wrap">
+        <span className="text-3xl font-bold text-[#1B5E20]">
+          ₹{lowestSize.price}
+        </span>
 
-            {product.mrp && (
-              <span className="text-gray-400 line-through">
-                ₹{product.mrp}
-              </span>
-            )}
+        <span className="text-gray-400 line-through">
+          ₹{lowestSize.mrp}
+        </span>
 
-            {product.discount && (
-              <span className="bg-[#EAF8EC] text-[#1B5E20] text-xs font-semibold px-3 py-1 rounded-full">
-                Save {product.discount.replace(" OFF", "")}
-              </span>
-            )}
-
-          </div>
-
+        {discount > 0 && (
+          <span className="bg-[#EAF8EC] text-[#1B5E20] text-xs font-semibold px-3 py-1 rounded-full">
+            Save {discount}%
+          </span>
         )}
+      </div>
 
+      <p className="mt-1 text-sm text-gray-500">
+        From {lowestSize.weight}
+      </p>
+    </div>
+  );
+})()}
         {/* Features */}
 
         <div className="mt-5 flex flex-wrap gap-2">
