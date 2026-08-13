@@ -1,11 +1,10 @@
-import AddToCartButton from "../../components/AddToCartButton";
 import Image from "next/image";
 import ProductCard from "@/app/components/ProductCard";
 import { notFound } from "next/navigation";
 import products from "@/app/data/products";
-import { FlowerIcon } from "lucide-react";
 import ProductPurchase from "@/app/components/ProductPurchase";
 import { supabase } from "@/lib/supabase";
+
 type Props = {
   params: Promise<{
     slug: string;
@@ -20,37 +19,24 @@ export default async function ProductPage({ params }: Props) {
   if (!product) {
     notFound();
   }
-const { data: sizeData, error: sizesError } = await supabase
-  .from("product_sizes")
-  .select("weight, mrp, price")
-  .eq("product_id", product.id)
-  .order("id", { ascending: true });
 
-if (sizesError) {
-  console.error("Product sizes error:", sizesError);
-}
+  // Fetch available sizes and prices from Supabase
+  const { data: sizeData, error: sizesError } = await supabase
+    .from("product_sizes")
+    .select("weight, mrp, price")
+    .eq("product_id", product.id)
+    .order("id", { ascending: true });
 
-const productSizes =
-  sizeData?.map((size) => ({
-    weight: size.weight,
-    mrp: Number(size.mrp),
-    price: Number(size.price),
-  })) || [];
+  if (sizesError) {
+    console.error("Product sizes error:", sizesError);
+  }
 
-  const whatsappMessage = `🌿 Hello Care With Herbs,
-
-I'd like to place an order from your website.
-
-🛍️ Product: ${product.name}
-📦 Weight: ${product.weight}
-
-Please confirm the price and payment details.
-
-Thank you for choosing Care With Herbs. 🌿`;
-
-  const whatsappLink = `https://wa.me/918533004409?text=${encodeURIComponent(
-    whatsappMessage
-  )}`;
+  const productSizes =
+    sizeData?.map((size) => ({
+      weight: String(size.weight),
+      mrp: Number(size.mrp),
+      price: Number(size.price),
+    })) || [];
 
   return (
     <main className="max-w-6xl mx-auto px-4 sm:px-6 py-10 md:py-16">
@@ -69,17 +55,19 @@ Thank you for choosing Care With Herbs. 🌿`;
         {/* Product Details */}
         <div className="bg-white rounded-3xl border border-gray-100 shadow-xl p-6 md:p-8">
 
+          {/* Product Name */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#1B5E20] leading-tight">
             {product.name}
           </h1>
 
-
+          {/* Stock */}
           <div className="mt-3">
             <span className="text-green-600 font-semibold">
               ✅ {product.stock}
             </span>
           </div>
 
+          {/* Reviews */}
           <div className="mt-5 flex items-center gap-2 text-yellow-500 text-lg">
             ⭐⭐⭐⭐⭐
             <span className="text-gray-700 text-base">
@@ -87,39 +75,52 @@ Thank you for choosing Care With Herbs. 🌿`;
             </span>
           </div>
 
+          {/* Trust Features */}
           <div className="mt-6 grid grid-cols-2 gap-3">
 
             <div className="bg-[#f8f6ef] rounded-xl p-3 text-center">
               🌿
-              <p className="text-sm font-semibold mt-1">100% Natural</p>
+              <p className="text-sm font-semibold mt-1">
+                100% Natural
+              </p>
             </div>
 
             <div className="bg-[#f8f6ef] rounded-xl p-3 text-center">
               🚚
-              <p className="text-sm font-semibold mt-1">Free Delivery</p>
+              <p className="text-sm font-semibold mt-1">
+                Free Delivery
+              </p>
             </div>
 
             <div className="bg-[#f8f6ef] rounded-xl p-3 text-center">
               🔒
-              <p className="text-sm font-semibold mt-1">Secure Payment</p>
+              <p className="text-sm font-semibold mt-1">
+                Secure Payment
+              </p>
             </div>
 
             <div className="bg-[#f8f6ef] rounded-xl p-3 text-center">
               🇮🇳
-              <p className="text-sm font-semibold mt-1">Made in India</p>
+              <p className="text-sm font-semibold mt-1">
+                Made in India
+              </p>
             </div>
 
           </div>
 
+          {/* Description */}
           <p className="mt-6 text-lg text-gray-600">
             {product.description}
           </p>
 
+          {/* SIZE + PRICE + CART + WHATSAPP */}
           <ProductPurchase
-  product={product}
-  sizes={productSizes}
-  whatsappNumber="918533004409"
-/>
+            product={product}
+            sizes={productSizes}
+            whatsappNumber="918533004409"
+          />
+
+          {/* Ingredients */}
           <div className="mt-6">
             <h3 className="text-2xl font-semibold text-[#1B5E20]">
               Ingredients
@@ -130,6 +131,7 @@ Thank you for choosing Care With Herbs. 🌿`;
             </p>
           </div>
 
+          {/* Benefits */}
           <div className="mt-6">
             <h3 className="text-2xl font-semibold text-[#1B5E20]">
               Benefits
@@ -144,6 +146,7 @@ Thank you for choosing Care With Herbs. 🌿`;
             </ul>
           </div>
 
+          {/* How To Use */}
           <div className="mt-6">
             <h3 className="text-2xl font-semibold text-[#1B5E20]">
               How to Use
@@ -154,11 +157,10 @@ Thank you for choosing Care With Herbs. 🌿`;
             </p>
           </div>
 
-        
-
         </div>
       </div>
 
+      {/* Related Products */}
       <hr className="my-20" />
 
       <section>
@@ -175,18 +177,6 @@ Thank you for choosing Care With Herbs. 🌿`;
             ))}
         </div>
       </section>
-
-      {/* Sticky Mobile Order Button */}
-      <div className="fixed bottom-5 left-0 right-0 px-5 z-50 md:hidden">
-        <a
-          href={whatsappLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block w-full bg-green-600 hover:bg-green-700 text-white text-center py-4 rounded-2xl shadow-2xl font-bold text-lg"
-        >
-          📱 Order on WhatsApp
-        </a>
-      </div>
 
     </main>
   );
