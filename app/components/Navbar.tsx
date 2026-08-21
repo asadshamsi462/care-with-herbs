@@ -41,7 +41,7 @@ if (pathname.startsWith("/admin")) {
 
             <div className="hidden sm:block">
               <h1 className="font-bold text-xl text-[#1B5E20]">
-                CARE WITH HERBS
+                CARE WITH HERBS™
               </h1>
 
               <p className="text-xs text-gray-500">
