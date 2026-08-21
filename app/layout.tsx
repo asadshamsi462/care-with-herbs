@@ -17,8 +17,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const BASE_URL = "https://carewithherbs.in";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://carewithherbs.in"),
+  metadataBase: new URL(BASE_URL),
 
   title: {
     default: "CARE WITH HERBS™ | Premium Herbal Wellness Products",
@@ -26,7 +28,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    "CARE WITH HERBS™ is a premium herbal wellness brand offering carefully selected herbal products with a focus on quality, purity and customer trust.",
+    "CARE WITH HERBS™ is an Indian herbal wellness brand offering carefully selected herbal products with a focus on quality, purity and customer trust.",
 
   keywords: [
     "Care With Herbs",
@@ -38,11 +40,13 @@ export const metadata: Metadata = {
     "premium herbal products",
     "Nagina herbal products",
     "Bijnor herbal products",
+    "herbal products India",
   ],
 
   authors: [
     {
       name: "CARE WITH HERBS™",
+      url: BASE_URL,
     },
   ],
 
@@ -50,7 +54,7 @@ export const metadata: Metadata = {
   publisher: "CARE WITH HERBS™",
 
   alternates: {
-    canonical: "https://carewithherbs.in",
+    canonical: BASE_URL,
   },
 
   robots: {
@@ -67,12 +71,20 @@ export const metadata: Metadata = {
 
   openGraph: {
     type: "website",
-    url: "https://carewithherbs.in",
+    url: BASE_URL,
     siteName: "CARE WITH HERBS™",
     title: "CARE WITH HERBS™ | Premium Herbal Wellness Products",
     description:
       "Discover carefully selected herbal wellness products from CARE WITH HERBS™.",
     locale: "en_IN",
+    images: [
+      {
+        url: `${BASE_URL}/icon.png`,
+        width: 512,
+        height: 512,
+        alt: "CARE WITH HERBS™",
+      },
+    ],
   },
 
   twitter: {
@@ -80,6 +92,7 @@ export const metadata: Metadata = {
     title: "CARE WITH HERBS™ | Premium Herbal Wellness Products",
     description:
       "Premium herbal wellness products from CARE WITH HERBS™.",
+    images: [`${BASE_URL}/icon.png`],
   },
 
   icons: {
@@ -87,14 +100,65 @@ export const metadata: Metadata = {
   },
 };
 
+/* -------------------------------------------------------
+   CARE WITH HERBS — Organization structured data
+   ------------------------------------------------------- */
+
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
+
+  "@id": `${BASE_URL}/#organization`,
+
   name: "CARE WITH HERBS",
-  url: "https://carewithherbs.in",
-  logo: "https://carewithherbs.in/icon.png",
+  alternateName: "CARE WITH HERBS™",
+
+  url: BASE_URL,
+
+  logo: {
+    "@type": "ImageObject",
+    url: `${BASE_URL}/icon.png`,
+  },
+
   description:
-    "CARE WITH HERBS is a premium herbal wellness brand offering carefully selected herbal products.",
+    "CARE WITH HERBS is an Indian herbal wellness brand offering carefully selected herbal products with a focus on quality, purity and customer trust.",
+
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Nagina",
+    addressRegion: "Uttar Pradesh",
+    addressCountry: "IN",
+  },
+
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+91-8533004409",
+    contactType: "customer service",
+    areaServed: "IN",
+    availableLanguage: ["English", "Hindi"],
+  },
+};
+
+/* -------------------------------------------------------
+   CARE WITH HERBS — Website structured data
+   ------------------------------------------------------- */
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+
+  "@id": `${BASE_URL}/#website`,
+
+  name: "CARE WITH HERBS",
+  alternateName: "CARE WITH HERBS™",
+
+  url: BASE_URL,
+
+  publisher: {
+    "@id": `${BASE_URL}/#organization`,
+  },
+
+  inLanguage: "en-IN",
 };
 
 export default function RootLayout({
@@ -105,10 +169,19 @@ export default function RootLayout({
   return (
     <html lang="en-IN">
       <head>
+        {/* Organization Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(organizationSchema),
+          }}
+        />
+
+        {/* Website Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema),
           }}
         />
       </head>
